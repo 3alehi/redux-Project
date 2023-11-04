@@ -1,5 +1,71 @@
-.todo{
-    display: flex;
-    justify-content: space-around;
-    width: 250px;
-}
+/* Style the container for the todo list */
+#Show-todo {
+    margin: 20px auto;
+    width: 300px;
+    background: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  /* Style each individual todo item */
+  .todo {
+    background: #fff;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  /* Style the todo title */
+  .todo h4 {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  /* Style the completion status */
+  .todo div {
+    color: #555;
+    font-size: 14px;
+  }
+  
+  /* Style the "complete" button */
+  .btn-complete {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Style the "delete" button */
+  .btn-delete {
+    background: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Style the input field and add button */
+  #input {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  #add-btn {
+    background: #0074cc;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
