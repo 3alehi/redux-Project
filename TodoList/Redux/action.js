@@ -1,4 +1,4 @@
-import { addTodo } from "./actionsType.js"
+import { addTodo ,IScomplated,DeleteTodo} from "./actionsType.js"
 
 
 function setaddTodo (title){
@@ -7,7 +7,21 @@ function setaddTodo (title){
         title
     }
 }
+function setIsCompleted (id){
+    return {
+        type: IScomplated,
+        id
+    }
+}
+function setDeleteTodo (id){
+    return {
+        type: DeleteTodo,
+        id
+    }
+}
 
 export {
-    setaddTodo
+    setaddTodo,
+    setIsCompleted,
+    setDeleteTodo
 }

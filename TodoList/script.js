@@ -1,14 +1,12 @@
-import { addTodo } from "./Redux/actionsType.js";
-import { setaddTodo } from "./Redux/action.js";
+import { addTodo, IScomplated, DeleteTodo } from "./Redux/actionsType.js";
+import { setaddTodo, setIsCompleted, setDeleteTodo } from "./Redux/action.js";
 
 let btn = document.getElementById("add-btn");
 let input = document.getElementById("input");
 let Show_todo = document.getElementById("Show-todo");
 
-// Define the initial state for the todo list
 const initialState = [];
 
-// Define the reducer function for the todo list
 const todoListReducer = (state = initialState, action) => {
   switch (action.type) {
     case addTodo: {
@@ -22,12 +20,19 @@ const todoListReducer = (state = initialState, action) => {
 
       return newtodos;
     }
+    case IScomplated: {
+      return state.map((todo) =>
+        todo.id === action.id ? { ...todo, isCompleted: true } : todo
+      );
+    }
+    case DeleteTodo: {
+      return state.filter((todo) => todo.id !== action.id);
+    }
     default:
       return state;
   }
 }
 
-// Create a Redux store for the todo list
 const createStoreTodoList = Redux.createStore(todoListReducer);
 
 btn.addEventListener("click", (e) => {
@@ -35,7 +40,6 @@ btn.addEventListener("click", (e) => {
   createStoreTodoList.dispatch(setaddTodo(inputValue));
   input.value = "";
 
-  // Clear the Show_todo container
   Show_todo.innerHTML = "";
 
   const todoList = createStoreTodoList.getState();
@@ -45,24 +49,18 @@ btn.addEventListener("click", (e) => {
     todoItem.innerHTML = `
       <h4>${element.title}</h4>
       <div>${element.isCompleted ? "تکمیل شده" : "تکمیل نشده"}</div>
-      <button class="btn-complete">انجام شده</button>
-      <button class="btn-delete">حذف</button>
+      <button class="btn-complete" onclick="markAsCompleted('${element.id}')">انجام شده</button>
+      <button class="btn-delete" onclick="removeTodo('${element.id}')">حذف</button>
     `;
-
-    // Add event listeners for the "complete" and "delete" buttons
-    const completeButton = todoItem.querySelector(".btn-complete");
-    completeButton.addEventListener("click", () => {
-  alert("asdf")
-    });
-
-    const deleteButton = todoItem.querySelector(".btn-delete");
-    deleteButton.addEventListener("click", () => {
-      // Handle deleting the todo here
-      // You can dispatch an action to remove the todo from the state
-      // Update the state accordingly
-      // ...
-    });
 
     Show_todo.appendChild(todoItem);
   });
 });
+
+function markAsCompleted(id) {
+  createStoreTodoList.dispatch(setIsCompleted(id));
+}
+
+function removeTodo(id) {
+  createStoreTodoList.dispatch(setDeleteTodo(id));
+}
